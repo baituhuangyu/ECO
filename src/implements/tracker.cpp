@@ -1,3 +1,4 @@
+#include <bits/stdc++.h>
 #include "tracker.hpp"
 #include "matlab_func.hpp"
 #include "opencv2/imgproc.hpp"
@@ -572,8 +573,8 @@ void Tracker::track(Mat img)
     // addWeighted(ROI1, 0.5, ROI2, 0.5, 0.0, ROI1);
     rectangle(img, rect_position_vis, Scalar(0,255,0), 2);
     resize(img,img,Size(),0.5,0.5);
-    imshow("ret",img);
-    waitKey(1);     
+//    imshow("ret",img);
+//    waitKey(1);
     ++m_frame_count;
 }
 

@@ -15,16 +15,20 @@ int main()
 {
     // debug targetlocalized
     config::ConfigParser("./resource/config.cfg");
-    string folder = "/home/huajun/WorkSpace/file/OTB100/dataset/TB-100/"+ config::file_name;
+//    string folder = "/home/huajun/WorkSpace/file/OTB100/dataset/TB-100/"+ config::file_name;
+//    string folder = "/home/huajun/WorkSpace/file/OTB100/dataset/TB-100/"+ config::file_name;
+    std::string folder = "./";
+//    std::string folder = "/mnt/sd/imgs/";
     char img1[100];
     int start = 1;
-    sprintf(img1,"/img/%04d.jpg",start);
+//    sprintf(img1,"/img/%04d.jpg",start);
+    sprintf(img1,"/imgs/img%05d.jpg",start);
     string img1_name = folder + img1;
     std::ifstream cin1(img1_name);
     while(!cin1.is_open())
     {
         ++start;
-        sprintf(img1,"/img/%04d.jpg",start);
+        sprintf(img1,"/imgs/img%05d.jpg",start);
         img1_name = folder + img1;
         cin1 = std::ifstream(img1_name);
         if(start>300)
@@ -34,7 +38,7 @@ int main()
         }
     }
     
-    string ground_truth = folder+ "/groundtruth_rect.2.txt";
+    string ground_truth = folder+ "/dog1_gt.txt";
     float x,y,h,w;
     std::string line;
     std::ifstream cin(ground_truth);
@@ -69,13 +73,15 @@ int main()
     Track::Tracker tracker(x, y, h, w, im);
     cout<<" initialed "<<endl;
 
-    string ofs_name = "/home/huajun/Desktop/OTB100/" + config::file_name +".2.txt";
+//    string ofs_name = "/home/huajun/Desktop/OTB100/" + config::file_name +".2.txt";
+    string ofs_name = "./test_out.2.txt";
     ofstream ofs(ofs_name,ios::trunc);
     ofs<<x<<","<<y<<","<<w<<","<<h<<endl;
     char name[100];
+    num_track = 20;
     for(int i =start+1;i<num_track;++i)
     {
-        sprintf(name,"/img/%04d.jpg",i);
+        sprintf(name,"/imgs/img%05d.jpg",i);
         string pic_name = folder+name;
         cout<<pic_name<<endl;
         im = imread(pic_name,IMREAD_COLOR);

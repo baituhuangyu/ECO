@@ -4,8 +4,9 @@
 #include<stdlib.h>
 #include <math.h>
 #ifdef __SSE2__
-#include <emmintrin.h>
+//#include <emmintrin.h>
 #endif
+#include "sse2neon.h"
 using namespace std;
 namespace Feature{
 
